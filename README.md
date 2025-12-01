@@ -1,4 +1,4 @@
-# Collaborative Code Editor
+# Collaborative Code Editor (Sync Pad)
 
 A real-time pair-programming web application where two or more users can join the same room, edit code simultaneously, and see each other's changes instantly. Features AI-style autocomplete suggestions (Just some regex).
 
@@ -8,11 +8,12 @@ A real-time pair-programming web application where two or more users can join th
 - **Backend API**: [https://syncpad.azurewebsites.net](https://syncpad.azurewebsites.net)
 - **API Docs**: [https://syncpad.azurewebsites.net/docs](https://syncpad.azurewebsites.net/docs)
 
-![Collaborative Editor](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Sync Pad](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
 ![React](https://img.shields.io/badge/React-18-blue.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
-[![Build and deploy Python app to Azure Web App - syncpad](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml/badge.svg?branch=main&event=deployment)](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml)
+[![Deployment - Azure](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml/badge.svg?branch=main&event=deployment)](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml)
+[![Deploy Frontend to GitHub Pages](https://github.com/Nikhil1479/sync-pad/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/Nikhil1479/sync-pad/actions/workflows/deploy-frontend.yml)
 
 ## 🚀 Features
 
@@ -352,6 +353,7 @@ ws://localhost:8000/ws/{roomId}
 ---
 
 Built with ❤️ using FastAPI and React
+
 
 
 
