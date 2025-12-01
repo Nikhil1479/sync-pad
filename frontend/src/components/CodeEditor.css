@@ -1,0 +1,149 @@
+.code-editor {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+
+.editor-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.line-numbers {
+  min-width: 50px;
+  padding: 1rem 0.5rem;
+  background: #252526;
+  border-right: 1px solid #3c3c3c;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #858585;
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+}
+
+.line-number {
+  height: 21px;
+  padding-right: 0.5rem;
+}
+
+.editor-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d4d4d4;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.code-textarea::placeholder {
+  color: #6a6a6a;
+}
+
+.code-textarea:focus {
+  outline: none;
+}
+
+/* Language-specific styling hints */
+.code-textarea.python {
+  /* Python styling */
+}
+
+.code-textarea.javascript,
+.code-textarea.typescript {
+  /* JS/TS styling */
+}
+
+/* Suggestion Overlay */
+.suggestion-overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.suggestion-text {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(102, 126, 234, 0.6);
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 0;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 4px;
+  padding: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px dashed rgba(102, 126, 234, 0.3);
+}
+
+/* Editor Footer */
+.editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 1rem;
+  background: #007acc;
+  color: white;
+  font-size: 0.75rem;
+}
+
+.language-badge {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.line-info {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Scrollbar styling */
+.code-textarea::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.code-textarea::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.code-textarea::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+.code-textarea::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.code-textarea::-webkit-scrollbar-corner {
+  background: #1e1e1e;
+}
