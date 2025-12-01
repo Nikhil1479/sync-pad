@@ -7,6 +7,7 @@ A real-time pair-programming web application where two or more users can join th
 - **Frontend**: [https://nikhil1479.github.io/sync-pad](https://nikhil1479.github.io/sync-pad)
 - **Backend API**: [https://syncpad.azurewebsites.net](https://syncpad.azurewebsites.net)
 - **API Docs**: [https://syncpad.azurewebsites.net/docs](https://syncpad.azurewebsites.net/docs)
+- **MySQL Database Host**: sql12.freesqldatabase.com
 
 ![Sync Pad](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
@@ -353,6 +354,7 @@ ws://localhost:8000/ws/{roomId}
 ---
 
 Built with ❤️ using FastAPI and React
+
 
 
 
