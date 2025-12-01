@@ -4,7 +4,7 @@ A real-time pair-programming web application where two or more users can join th
 
 ## 🌐 Live Demo
 
-- **Frontend**: [https://nikhil1479.github.io/Collaborative-Editor](https://nikhil1479.github.io/Collaborative-Editor)
+- **Frontend**: [https://nikhil1479.github.io/Collaborative-Editor](https://nikhil1479.github.io/sync-pad)
 - **Backend API**: [https://syncpad.azurewebsites.net](https://syncpad.azurewebsites.net)
 - **API Docs**: [https://syncpad.azurewebsites.net/docs](https://syncpad.azurewebsites.net/docs)
 
@@ -351,4 +351,5 @@ ws://localhost:8000/ws/{roomId}
 ---
 
 Built with ❤️ using FastAPI and React
+
 
