@@ -25,8 +25,8 @@ jobs:
           python-version: '3.11'
 
       - name: Create and start virtual environment and install dependencies
+        working-directory: backend
         run: |
-          cd backend
           python -m venv antenv
           source antenv/bin/activate
           pip install -r requirements.txt
@@ -35,11 +35,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            backend/
-            !backend/antenv/
-            !backend/__pycache__/
-            !backend/**/__pycache__/
+          path: backend/
+          include-hidden-files: false
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,6 +50,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
+          path: app
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -67,5 +65,5 @@ jobs:
         with:
           app-name: 'syncpad'
           slot-name: 'Production'
-          package: backend/
+          package: app/
           startup-command: 'python -m uvicorn app.main:app --host 0.0.0.0 --port 8000'
