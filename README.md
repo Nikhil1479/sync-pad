@@ -12,7 +12,7 @@ A real-time pair-programming web application where two or more users can join th
 ![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
 ![React](https://img.shields.io/badge/React-18-blue.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
-[![Deployment - Azure](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml/badge.svg?branch=main&event=deployment)](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml)
+[![Build and deploy Python app to Azure Web App - syncpad](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml/badge.svg)](https://github.com/Nikhil1479/sync-pad/actions/workflows/main_syncpad.yml)
 [![Deploy Frontend to GitHub Pages](https://github.com/Nikhil1479/sync-pad/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/Nikhil1479/sync-pad/actions/workflows/deploy-frontend.yml)
 
 ## 🚀 Features
@@ -353,6 +353,7 @@ ws://localhost:8000/ws/{roomId}
 ---
 
 Built with ❤️ using FastAPI and React
+
 
 
 
