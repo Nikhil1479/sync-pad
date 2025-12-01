@@ -2,7 +2,7 @@
   "name": "collaborative-editor-frontend",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://nikhil1479.github.io/Collaborative-Editor",
+  "homepage": "https://nikhil1479.github.io/sync-pad",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@types/node": "^20.10.0",
