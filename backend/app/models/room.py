@@ -1,7 +1,8 @@
-from sqlalchemy import Column, String, Text, DateTime
+from sqlalchemy import Column, String, Text, DateTime, TIMESTAMP
 from sqlalchemy.sql import func
 from app.database import Base
 import uuid
+from datetime import datetime
 
 
 class Room(Base):
@@ -13,9 +14,9 @@ class Room(Base):
                 default=lambda: str(uuid.uuid4()))
     code = Column(Text, default="# Start coding here...\n")
     language = Column(String(50), default="python")
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, server_default=func.now(),
-                        onupdate=func.now())
+    created_at = Column(TIMESTAMP, server_default=func.current_timestamp())
+    updated_at = Column(TIMESTAMP, server_default=func.current_timestamp(),
+                        onupdate=datetime.utcnow)
 
     def __repr__(self):
         return f"<Room(id={self.id}, language={self.language})>"
