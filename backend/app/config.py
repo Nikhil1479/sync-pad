@@ -10,7 +10,10 @@ class Settings(BaseSettings):
 
     # CORS settings
     CORS_ORIGINS: list[str] = [
-        "http://localhost:3000", "http://127.0.0.1:3000"]
+        "http://localhost:3000", 
+        "http://127.0.0.1:3000",
+        "https://nikhil1479.github.io"
+    ]
 
     class Config:
         env_file = ".env"
