@@ -124,7 +124,7 @@ const RoomPage: React.FC = () => {
     <div className="room-page">
       <header className="room-header">
         <div className="header-left">
-          <h1>Collaborative Editor</h1>
+          <h1>SyncPad</h1>
           <span className="room-id">Room: {roomId}</span>
         </div>
         

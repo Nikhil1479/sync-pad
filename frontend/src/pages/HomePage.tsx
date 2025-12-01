@@ -35,9 +35,9 @@ const HomePage: React.FC = () => {
     <div className="home-page">
       <div className="home-container">
         <div className="home-header">
-          <h1>🖥️ Collaborative Code Editor</h1>
+          <h1>🖥️ SyncPad</h1>
           <p className="subtitle">
-            Real-time pair programming made simple
+            Real-time collaborative code editor for pair programming
           </p>
         </div>
 
