@@ -2,6 +2,12 @@
 
 A real-time pair-programming web application where two or more users can join the same room, edit code simultaneously, and see each other's changes instantly. Features AI-style autocomplete suggestions (Just some regex).
 
+## 🌐 Live Demo
+
+- **Frontend**: [https://nikhil1479.github.io/Collaborative-Editor](https://nikhil1479.github.io/Collaborative-Editor)
+- **Backend API**: [https://syncpad.azurewebsites.net](https://syncpad.azurewebsites.net)
+- **API Docs**: [https://syncpad.azurewebsites.net/docs](https://syncpad.azurewebsites.net/docs)
+
 ![Collaborative Editor](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
 ![React](https://img.shields.io/badge/React-18-blue.svg)
