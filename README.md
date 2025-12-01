@@ -342,10 +342,7 @@ ws://localhost:8000/ws/{roomId}
 - [ ] Authentication and user accounts
 - [ ] Room persistence and history
 
-## 📄 License
-
-MIT License - feel free to use this project for learning and development.
-
 ---
 
 Built with ❤️ using FastAPI and React
+
