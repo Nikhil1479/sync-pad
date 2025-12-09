@@ -1,3 +1,4 @@
+import uvicorn 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -7,7 +8,7 @@ from app.database import init_db
 from app.routers import rooms, autocomplete, websocket
 
 settings = get_settings()
-
+uvicorn.config.Config.ws_per_message_deflate = False
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -57,3 +58,4 @@ async def root():
 async def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
+
