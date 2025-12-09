@@ -8,6 +8,12 @@ from app.services.room_service import RoomService
 router = APIRouter(tags=["websocket"])
 
 
+async def save_room_to_db(room_id: str, code: str) -> None:
+    """Save room code to database - used as callback for debounced saves."""
+    async with async_session_maker() as db:
+        await RoomService.update_room_code(db, room_id, code)
+
+
 @router.websocket("/ws/{room_id}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str):
     """
@@ -46,15 +52,14 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
             message_type = message.get("type", "code_update")
 
             if message_type == "code_update":
-                # Update in-memory state
+                # Update in-memory state immediately (fast!)
                 code = message.get("code", "")
                 manager.update_room_state(room_id, code)
 
-                # Persist to database periodically (simple approach)
-                async with async_session_maker() as db:
-                    await RoomService.update_room_code(db, room_id, code)
+                # Schedule debounced database save (2 seconds after last change)
+                manager.schedule_save(room_id, save_room_to_db)
 
-                # Broadcast to other users in the room
+                # Broadcast to other users immediately (no waiting for DB)
                 await manager.broadcast_to_room(
                     room_id,
                     {
@@ -82,6 +87,9 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
                 await websocket.send_json({"type": "pong"})
 
     except WebSocketDisconnect:
+        # Force save any pending changes before disconnecting
+        await manager.force_save_room(room_id, save_room_to_db)
+
         # Handle disconnection
         manager.disconnect(websocket, room_id)
 
@@ -95,6 +103,9 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
         )
 
     except Exception as e:
+        # Force save before cleanup on error
+        await manager.force_save_room(room_id, save_room_to_db)
+
         # Handle other errors
         manager.disconnect(websocket, room_id)
         print(f"WebSocket error: {e}")

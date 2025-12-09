@@ -1,5 +1,6 @@
 from fastapi import WebSocket
-from typing import Dict, Set
+from typing import Dict, Set, Optional
+import asyncio
 import json
 
 
@@ -11,6 +12,12 @@ class ConnectionManager:
         self.active_connections: Dict[str, Set[WebSocket]] = {}
         # room_id -> current code state (in-memory cache)
         self.room_states: Dict[str, str] = {}
+        # room_id -> pending save task for debouncing
+        self._save_tasks: Dict[str, asyncio.Task] = {}
+        # room_id -> flag indicating if state is dirty (needs saving)
+        self._dirty_rooms: Set[str] = set()
+        # Debounce delay in seconds
+        self.SAVE_DEBOUNCE_DELAY = 2.0
 
     async def connect(self, websocket: WebSocket, room_id: str) -> None:
         """Accept a new WebSocket connection and add it to the room."""
@@ -63,6 +70,7 @@ class ConnectionManager:
     def update_room_state(self, room_id: str, code: str) -> None:
         """Update the in-memory code state for a room."""
         self.room_states[room_id] = code
+        self._dirty_rooms.add(room_id)
 
     def get_room_state(self, room_id: str) -> str:
         """Get the current code state for a room."""
@@ -76,6 +84,42 @@ class ConnectionManager:
     def get_connection_count(self, room_id: str) -> int:
         """Get the number of active connections in a room."""
         return len(self.active_connections.get(room_id, set()))
+
+    def schedule_save(self, room_id: str, save_callback) -> None:
+        """Schedule a debounced save for the room."""
+        # Cancel any existing save task for this room
+        if room_id in self._save_tasks:
+            self._save_tasks[room_id].cancel()
+
+        async def debounced_save():
+            try:
+                await asyncio.sleep(self.SAVE_DEBOUNCE_DELAY)
+                if room_id in self._dirty_rooms:
+                    code = self.room_states.get(room_id)
+                    if code is not None:
+                        await save_callback(room_id, code)
+                        self._dirty_rooms.discard(room_id)
+            except asyncio.CancelledError:
+                pass  # Task was cancelled, new save scheduled
+            except Exception as e:
+                print(f"Error saving room {room_id}: {e}")
+            finally:
+                self._save_tasks.pop(room_id, None)
+
+        self._save_tasks[room_id] = asyncio.create_task(debounced_save())
+
+    async def force_save_room(self, room_id: str, save_callback) -> None:
+        """Force immediate save of room state (used on disconnect)."""
+        # Cancel any pending save
+        if room_id in self._save_tasks:
+            self._save_tasks[room_id].cancel()
+            self._save_tasks.pop(room_id, None)
+
+        if room_id in self._dirty_rooms:
+            code = self.room_states.get(room_id)
+            if code is not None:
+                await save_callback(room_id, code)
+                self._dirty_rooms.discard(room_id)
 
 
 # Global connection manager instance
