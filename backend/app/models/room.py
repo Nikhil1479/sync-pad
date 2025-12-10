@@ -16,7 +16,8 @@ class Room(Base):
     # Use Python-side defaults for MySQL 5.5 compatibility
     # (MySQL 5.5 only allows one TIMESTAMP with CURRENT_TIMESTAMP)
     created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow,
+                        onupdate=datetime.utcnow)
 
     def __repr__(self):
         return f"<Room(id={self.id}, language={self.language})>"

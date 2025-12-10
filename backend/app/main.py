@@ -1,6 +1,7 @@
-import uvicorn 
-from fastapi import FastAPI
+import uvicorn
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 
 from app.config import get_settings
@@ -9,6 +10,7 @@ from app.routers import rooms, autocomplete, websocket
 
 settings = get_settings()
 uvicorn.config.Config.ws_per_message_deflate = False
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -29,13 +31,15 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure CORS
+# Configure CORS - more permissive for Azure deployment
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=86400,  # Cache preflight for 24 hours
 )
 
 # Include routers
@@ -58,4 +62,3 @@ async def root():
 async def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
-

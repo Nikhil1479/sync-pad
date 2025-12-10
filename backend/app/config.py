@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from typing import List
 
 
 class Settings(BaseSettings):
@@ -8,11 +9,15 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "mysql+aiomysql://root:root@localhost:3306/collaborative_editor"
     SYNC_DATABASE_URL: str = "mysql+pymysql://root:root@localhost:3306/collaborative_editor"
 
-    # CORS settings
-    CORS_ORIGINS: list[str] = [
-        "http://localhost:3000", 
+    # CORS settings - include all possible origins
+    CORS_ORIGINS: List[str] = [
+        "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://nikhil1479.github.io"
+        "http://localhost:3001",
+        "https://nikhil1479.github.io",
+        "https://nikhil1479.github.io/",
+        "https://nikhil1479.github.io/Collaborative-Editor",
+        "https://nikhil1479.github.io/Collaborative-Editor/",
     ]
 
     class Config:
